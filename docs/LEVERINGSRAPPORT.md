@@ -1,5 +1,8 @@
 # Leveringsrapport: Bondeskak for børn (bestilling #20, 16. oktober 2026)
 
+## Sådan ser du resultatet
+Åbn **http://100.122.133.31:8088/vis/bondeskak/** (hjemme også http://mini.local:8088/vis/bondeskak/), eller tryk «Åbn resultatet» på kortet i Overblik. Virker på iPhonen med Tailscale tændt. Afprøvet 16. oktober kl. 23.10: siden åbner, et træk virker, og computeren svarer uden fejl i konsollen.
+
 ## Leveret
 - `src/regler.js` (regler, uforanderlig), `src/ai.js` (10 niveauer), `src/kamp.js` (kampplan, tekster), `site/` (index.html, stil.css, spil.js).
 - `docs/SPECIFIKATION.md`, `docs/accept_check.mjs` (uafhængigt facit), tests i `tests/` (18 tests).
@@ -10,10 +13,13 @@
 - `node --test tests/`: 18 af 18 bestået. Dækning: linjer 98 %+ i src/, spil.js 95 %.
 - Computerens tid: niveau 10 ca. 0,45 s første træk (målt med `docs/tid.mjs`).
 
-## IKKE kørt / ikke bevist
-- Pipelinens porte (`kor-porte.py`) og commit: kommandoerne blev afvist af tilladelserne i den ubemandede kørsel. Projektet er derfor ikke committet i git (repo er oprettet, filer ligger uden commit), og lint, sikkerhed, visuel port og tilgængelighedsport er ikke kørt.
-- Browser: ingen browser kunne nås fra kørslen. Brugerfladen er kun prøvet med et falsk DOM i Node (`tests/ui-smoke.test.js`: et helt spil klikkes igennem uden fejl). **Selve udseendet og animationerne (kampen) er aldrig set med øjne.** Det er den vigtigste åbne risiko.
-- Kontrollant og børnetest. Balance af sværhedsgrader ud over selvspil.
+## Porte og browser (16. oktober, aften)
+- Alle 12 porte bestået (`logs/porte/20261016-230723/rapport.md`): bygning, typekontrol (tsc med checkJs), lint (eslint), 18 tests, dækning, sikkerhed (semgrep p/javascript + egne regler, osv-scanner, gitleaks), acceptprøve (`node docs/accept_check.mjs`), visuel kontrol (390 og 1280 px), tilgængelighed (axe-core) og visuel vurdering.
+- Rettet undervejs: porte.json manglede JS-opsætning (portene kørte Pythons værktøjer), brættet var markeret som ARIA-gitter uden rækker (nu en knapgruppe), to typefejl i site/spil.js.
+- Committet på minen (`~/git/bondeskak.git`).
 
-## Sådan ses det
-Kør en lille webserver i projektmappen (moduler virker ikke fra file://): `cd ~/arbejde/bondeskak && python3 -m http.server 8090`, åbn `http://<mini>:8090/site/`. Fast hosting er ikke sat op.
+## Ikke bevist
+- Kontrollant (lokal model) er ikke kørt. Børnetest og balance ud over selvspil er ikke målt.
+
+## Næste skridt
+Din prøve. Er du tilfreds, så tryk «Godkend – færdig» på kortet i Overblik; så flyttes Bondeskak til Lenovo-disken, når iMac'en er tændt.
