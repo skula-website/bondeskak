@@ -95,7 +95,6 @@ function byggBraet() {
     const c = el('button', `felt${(raekke(f) + kolonne(f)) % 2 ? ' moerk' : ''}`);
     c.type = 'button';
     c.dataset.felt = String(f);
-    c.setAttribute('role', 'gridcell');
     c.addEventListener('click', () => klikFelt(f));
     braetEl.append(c);
   }
@@ -113,7 +112,7 @@ function byggBonder() {
 }
 function opdaterFelter() {
   const maal = new Map(valgt === null ? [] : lovligeTraek(spil, valgt).map((t) => [t.til, t]));
-  for (const c of braetEl.children) {
+  for (const c of /** @type {HTMLCollectionOf<HTMLElement>} */ (braetEl.children)) {
     const f = Number(c.dataset.felt);
     c.classList.toggle('valgt', f === valgt);
     c.classList.toggle('maal', maal.has(f) && !maal.get(f).slag);
@@ -338,8 +337,9 @@ $('nyt').addEventListener('click', nytSpilStart);
 $('igen').addEventListener('click', nytSpilStart);
 $('lyd').addEventListener('click', (e) => {
   lydPaa = !lydPaa;
-  e.currentTarget.setAttribute('aria-pressed', String(lydPaa));
-  e.currentTarget.textContent = lydPaa ? '🔊 Lyd' : '🔇 Lyd';
+  const knap = /** @type {HTMLElement} */ (e.currentTarget);
+  knap.setAttribute('aria-pressed', String(lydPaa));
+  knap.textContent = lydPaa ? '🔊 Lyd' : '🔇 Lyd';
 });
 
 byggBraet();

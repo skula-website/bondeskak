@@ -1,5 +1,14 @@
 {
   "bygning": "node --check src/regler.js && node --check src/ai.js && node --check src/kamp.js && node --check site/spil.js",
+  "typekontrol": "tsc --noEmit -p tsconfig.json",
+  "lint": "eslint src tests site",
   "tests": ["node --test tests/"],
-  "dækning": {"kommando": "node --test --experimental-test-coverage --test-coverage-lines={min} --test-coverage-functions={min} tests/", "minimum": 80}
+  "dækning": {"kommando": "node --test --experimental-test-coverage --test-coverage-lines={min} --test-coverage-functions={min} tests/", "minimum": 80},
+  "sikkerhed": {
+    "statisk": "semgrep scan --config p/javascript --config $HOME/porte/runner/ts-sikkerhed.yml --error --metrics=off --quiet --exclude node_modules --exclude logs src site",
+    "afhaengigheder": "osv-scanner scan source --recursive .",
+    "nøgler": "gitleaks dir . --no-banner --redact --exit-code 1"
+  },
+  "visuel": {"aktiv": true},
+  "web": {"start": "python3 -m http.server 8771", "url": "http://127.0.0.1:8771", "sider": ["/site/"]}
 }
