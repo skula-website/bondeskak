@@ -1,7 +1,9 @@
 # Leveringsrapport: Bondeskak for børn (bestilling #20, 16. oktober 2026)
 
 ## Sådan ser du resultatet
-Åbn **http://100.122.133.31:8088/vis/bondeskak/** (hjemme også http://mini.local:8088/vis/bondeskak/), eller tryk «Åbn resultatet» på kortet i Overblik. Virker på iPhonen med Tailscale tændt. Afprøvet 16. oktober kl. 23.10: siden åbner, et træk virker, og computeren svarer uden fejl i konsollen.
+Bondeskak er færdigt (godkendt af Michael 17. oktober) og flyttet til Lenovo-disken: `/Volumes/Lenovo PS8/ps8/bondeskak`.
+Dobbeltklik på ikonet **«Åbn Bondeskak»** i den mappe (den gule bonde). Det starter en lille server på iMac'en og åbner spillet på **http://127.0.0.1:8835/site/**. Kører serveren allerede, åbnes siden bare. Afprøvet 17. oktober: fra stoppet server til spillet vist på få sekunder, ingen konsolfejl.
+Skal der arbejdes videre, så tryk «Genoptag» på kortet i Overblik; så hentes projektet tilbage til minen (kræver, at iMac'en er tændt).
 
 ## Leveret
 - `src/regler.js` (regler, uforanderlig), `src/ai.js` (10 niveauer), `src/kamp.js` (kampplan, tekster), `site/` (index.html, stil.css, spil.js).
