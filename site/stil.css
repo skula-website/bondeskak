@@ -1,0 +1,120 @@
+:root {
+  --gul: #ffc928; --gul-moerk: #e09a00;
+  --lilla: #9b5de5; --lilla-moerk: #6a2fb8;
+  --felt-lys: #fff1c9; --felt-moerk: #7fd1ae;
+  --bg1: #bfe9ff; --bg2: #ffe3f1;
+  --tekst: #2b2250;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; color: var(--tekst);
+  font-family: "Trebuchet MS", "Comic Sans MS", system-ui, sans-serif;
+  background: linear-gradient(160deg, var(--bg1), var(--bg2));
+}
+main { max-width: 680px; margin: 0 auto; padding: 12px 12px 40px; }
+h1 {
+  margin: 4px 0 0; text-align: center; font-size: clamp(2rem, 8vw, 3.2rem);
+  color: var(--lilla-moerk); text-shadow: 3px 3px 0 var(--gul);
+}
+.undertitel { text-align: center; margin: 4px 0 12px; font-size: 1.05rem; }
+.niveau { text-align: center; background: #fff8; border-radius: 20px; padding: 8px; margin-bottom: 10px; }
+.niveau-tekst { display: block; font-weight: bold; margin-bottom: 4px; }
+#stjerner { display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; }
+#stjerner button {
+  font-size: 1.8rem; line-height: 1; padding: 4px 6px; min-width: 40px; min-height: 44px;
+  background: none; border: 0; cursor: pointer; filter: grayscale(1) opacity(.45);
+  transition: transform .15s, filter .15s;
+}
+#stjerner button.aktiv { filter: none; }
+#stjerner button:hover, #stjerner button:focus-visible { transform: scale(1.25); }
+#niveau-navn { display: block; font-weight: bold; color: var(--lilla-moerk); min-height: 1.4em; }
+.raekke { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+#status {
+  flex: 1 1 200px; font-size: 1.3rem; font-weight: bold; padding: 8px 14px;
+  border-radius: 16px; background: var(--gul); min-height: 48px; display: flex; align-items: center;
+}
+#status.lilla { background: var(--lilla); color: #fff; }
+.knapper { display: flex; gap: 6px; flex-wrap: wrap; }
+button {
+  font: inherit; font-weight: bold; color: var(--tekst); cursor: pointer;
+  background: #fff; border: 3px solid var(--lilla); border-radius: 16px; padding: 10px 14px; min-height: 48px;
+  box-shadow: 0 4px 0 var(--lilla-moerk);
+}
+button:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--lilla-moerk); }
+button:focus-visible { outline: 4px solid #ff5d8f; outline-offset: 2px; }
+button[aria-pressed="false"] { opacity: .6; }
+
+#braet-ramme {
+  position: relative; width: 100%; aspect-ratio: 1; border: 8px solid var(--lilla-moerk);
+  border-radius: 20px; overflow: hidden; background: var(--felt-lys); box-shadow: 0 8px 0 #0002;
+}
+#braet, #bonder, #effekter { position: absolute; inset: 0; }
+#braet { display: grid; grid-template: repeat(8, 1fr) / repeat(8, 1fr); }
+#bonder, #effekter { pointer-events: none; }
+.felt { border: 0; border-radius: 0; box-shadow: none; padding: 0; min-height: 0; position: relative; background: var(--felt-lys); }
+.felt.moerk { background: var(--felt-moerk); }
+.felt:active { transform: none; box-shadow: none; }
+.felt.valgt { background: #ffe066; outline: 4px solid #ff9f1c; outline-offset: -4px; }
+.felt.maal::after, .felt.slagmaal::after {
+  content: ""; position: absolute; inset: 30%; border-radius: 50%; background: #ff5d8f99;
+  animation: puls 0.9s ease-in-out infinite;
+}
+.felt.slagmaal::after { inset: 8%; background: none; border: 5px dashed #ff2e63; animation: spin 3s linear infinite; }
+.felt.tip { box-shadow: inset 0 0 0 5px #00c2a8; animation: puls 0.6s ease-in-out infinite; }
+@keyframes puls { 50% { transform: scale(1.18); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.bonde { position: absolute; width: 12.5%; height: 12.5%; will-change: transform; }
+.bonde .krop {
+  position: absolute; left: 24%; right: 24%; bottom: 8%; height: 34%; border-radius: 40% 40% 18% 18%;
+  background: var(--farve); border: 3px solid var(--moerk);
+}
+.bonde .hoved {
+  position: absolute; left: 22%; right: 22%; top: 16%; height: 46%; border-radius: 50%;
+  background: #ffe0c2; border: 3px solid var(--moerk); z-index: 2;
+}
+.bonde .hat {
+  position: absolute; left: 14%; right: 14%; top: 12%; height: 22%; border-radius: 50% 50% 8% 8%;
+  background: var(--farve); border: 3px solid var(--moerk); z-index: 3;
+}
+.bonde .oje { position: absolute; top: 46%; width: 14%; height: 20%; border-radius: 50%; background: #2b2250; }
+.bonde .oje:nth-of-type(1) { left: 24%; } .bonde .oje:nth-of-type(2) { right: 24%; }
+.bonde .mund { position: absolute; left: 34%; right: 34%; bottom: 14%; height: 14%; border-bottom: 3px solid #c2185b; border-radius: 0 0 50% 50%; }
+.bonde .sverd {
+  position: absolute; right: -2%; top: 34%; width: 10%; height: 46%; background: #e9eef5; border: 2px solid #6c7a89;
+  border-radius: 3px 3px 0 0; transform-origin: 50% 100%; transform: rotate(20deg); z-index: 4; opacity: 0; transition: opacity .15s;
+}
+.bonde .sverd::after { content: ""; position: absolute; left: -90%; right: -90%; bottom: -8%; height: 12%; background: #d4a017; border-radius: 3px; }
+.bonde.kaemper .sverd { opacity: 1; }
+.gul-bonde { --farve: var(--gul); --moerk: var(--gul-moerk); }
+.lilla-bonde { --farve: var(--lilla); --moerk: var(--lilla-moerk); }
+.bonde.lilla-bonde .sverd { right: auto; left: -2%; transform: rotate(-20deg); }
+.bonde.sejr { animation: dans 0.5s ease-in-out infinite alternate; }
+@keyframes dans { from { transform: rotate(-12deg); } to { transform: translateY(-14%) rotate(12deg); } }
+
+.pow {
+  position: absolute; font-size: clamp(1.4rem, 7vw, 2.6rem); font-weight: 900; color: #fff; z-index: 10;
+  -webkit-text-stroke: 3px #ff2e63; paint-order: stroke fill; transform: translate(-50%, -50%);
+}
+.gnist, .stjerne, .konfetti { position: absolute; pointer-events: none; z-index: 9; }
+.stjerne { font-size: 1.6rem; transform: translate(-50%, -50%); }
+.konfetti { width: 10px; height: 16px; top: -20px; z-index: 30; }
+
+#slut { position: absolute; inset: 0; background: #2b225099; display: grid; place-items: center; z-index: 40; }
+#slut[hidden] { display: none; }
+.slut-boks {
+  background: #fff; border: 6px solid var(--gul); border-radius: 28px; padding: 18px 22px; text-align: center; max-width: 85%;
+  animation: pop .5s cubic-bezier(.3, 1.6, .5, 1);
+}
+.slut-boks h2 { margin: 0 0 6px; font-size: clamp(1.6rem, 7vw, 2.4rem); color: var(--lilla-moerk); }
+.slut-boks p { margin: 0 0 12px; font-size: 1.15rem; }
+@keyframes pop { from { transform: scale(.2); } }
+
+.regler { margin-top: 16px; background: #fff9; border-radius: 16px; padding: 10px 16px; font-size: 1.05rem; }
+.regler summary { cursor: pointer; font-weight: bold; min-height: 32px; }
+.gul-tekst { background: var(--gul); padding: 0 6px; border-radius: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .felt.maal::after, .felt.slagmaal::after, .felt.tip, .bonde.sejr { animation: none; }
+  #stjerner button { transition: none; }
+}

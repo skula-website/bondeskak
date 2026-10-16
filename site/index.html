@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bondeskak – bønderne kæmper!</title>
+  <link rel="stylesheet" href="stil.css">
+</head>
+<body>
+  <main>
+    <h1>Bondeskak</h1>
+    <p class="undertitel">Kom først over på den anden side – eller slå alle de lilla bønder!</p>
+
+    <section aria-label="Vælg sværhedsgrad" class="niveau">
+      <span class="niveau-tekst">Hvor stærk skal computeren være?</span>
+      <div id="stjerner" role="radiogroup" aria-label="Sværhedsgrad 1 til 10"></div>
+      <output id="niveau-navn" aria-live="polite"></output>
+    </section>
+
+    <div class="raekke">
+      <div id="status" role="status" aria-live="polite">Din tur!</div>
+      <div class="knapper">
+        <button id="tip" type="button">💡 Vis tip</button>
+        <button id="lyd" type="button" aria-pressed="true">🔊 Lyd</button>
+        <button id="nyt" type="button">🔄 Nyt spil</button>
+      </div>
+    </div>
+
+    <div id="braet-ramme">
+      <div id="braet" role="grid" aria-label="Skakbræt"></div>
+      <div id="bonder" aria-hidden="true"></div>
+      <div id="effekter" aria-hidden="true"></div>
+      <div id="slut" hidden>
+        <div class="slut-boks" role="dialog" aria-labelledby="slut-titel">
+          <h2 id="slut-titel"></h2>
+          <p id="slut-tekst"></p>
+          <button id="igen" type="button">🎉 Spil igen</button>
+        </div>
+      </div>
+    </div>
+
+    <details class="regler">
+      <summary>Hvordan spiller man?</summary>
+      <ul>
+        <li>Du er <b class="gul-tekst">gul</b> og går først. Klik på en gul bonde, og klik så på et lyst felt.</li>
+        <li>En bonde går ét felt frem. Fra start må den gå to felter frem.</li>
+        <li>En bonde slår på skrå fremad – så kommer der en kamp!</li>
+        <li>Du vinder, hvis en bonde når den anden side, hvis du slår alle de lilla bønder, eller hvis de lilla ikke kan flytte sig.</li>
+      </ul>
+    </details>
+  </main>
+  <script type="module" src="spil.js"></script>
+</body>
+</html>

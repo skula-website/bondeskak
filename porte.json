@@ -1,0 +1,5 @@
+{
+  "bygning": "node --check src/regler.js && node --check src/ai.js && node --check src/kamp.js && node --check site/spil.js",
+  "tests": ["node --test tests/"],
+  "dækning": {"kommando": "node --test --experimental-test-coverage --test-coverage-lines={min} --test-coverage-functions={min} tests/", "minimum": 80}
+}
