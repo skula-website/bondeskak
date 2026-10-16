@@ -18,6 +18,12 @@
 - Rettet undervejs: porte.json manglede JS-opsætning (portene kørte Pythons værktøjer), brættet var markeret som ARIA-gitter uden rækker (nu en knapgruppe), to typefejl i site/spil.js.
 - Committet på minen (`~/git/bondeskak.git`).
 
+## Ny grafik og animation (16. oktober, nat, Michaels ønske)
+- Bønderne er tegnet om som vektorgrafik (skabeloner i `site/index.html`): rund krop med lys og skygge, ansigt med kinder og glans i øjnene, gul med stråhat, lilla med hjelm og fjer. De trækker vejret og blinker hver for sig, og en valgt bonde løfter sig og svæver.
+- Hop med sats, svæv og landing (klemmes og retter sig op), skygge på brættet og støv ved landing. Kamp: bønderne løber med små hop, sværdene springer frem og hugger, glimt og POW i midten, den tabende flyver baglæns med røgsky, vinderen hopper ind på feltet. De lilla vugger, mens computeren tænker.
+- Brættet har dybde (rammegradient, felter med lys) og blødere markeringer. «Reducer bevægelse» slukker det hele.
+- Alle 12 porte bestået igen (`logs/porte/20261016-233033`). Set i browseren i mobilbredde med et slag; ingen konsolfejl.
+
 ## Ikke bevist
 - Kontrollant (lokal model) er ikke kørt. Børnetest og balance ud over selvspil er ikke målt.
 
