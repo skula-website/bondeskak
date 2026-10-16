@@ -76,35 +76,6 @@ const lyd = {
 };
 
 // ---------- tegning ----------
-const HATTE = {
-  gul: '<path class="k" d="M28 40 C28 23 38 15 50 15 C62 15 72 23 72 40 Z" fill="url(#g-hat-gul)"/>'
-    + '<path class="k" d="M18 41 Q50 30 82 41 Q50 50 18 41 Z" fill="url(#g-hat-gul)"/>'
-    + '<path d="M30 35 Q50 29 70 35" stroke="#e0533d" stroke-width="4" fill="none" stroke-linecap="round"/>',
-  lilla: '<path d="M50 16 C47 5 58 -1 66 3 C59 5 56 10 54 17 Z" fill="#ff5d8f" stroke="#a3124a" stroke-width="2"/>'
-    + '<path class="k" d="M28 42 C28 22 38 13 50 13 C62 13 72 22 72 42 Z" fill="url(#g-hat-lilla)"/>'
-    + '<rect class="k" x="25" y="37" width="50" height="8" rx="4" fill="url(#g-hat-lilla)"/>'
-    + '<path d="M38 20 Q42 16 47 15" stroke="#fff" stroke-opacity=".6" stroke-width="3" fill="none" stroke-linecap="round"/>',
-};
-function bondeSvg(navn) {
-  const blink = (-Math.random() * 4.6).toFixed(2);
-  const sx = navn === 'gul' ? 76 : 18; // sværdet i den hånd, der vender mod modstanderen
-  return '<svg viewBox="0 0 100 100" aria-hidden="true">'
-    + `<path class="k" d="M30 91 C28 75 33 63 43 59 L57 59 C67 63 72 75 70 91 Z" fill="url(#g-krop-${navn})"/>`
-    + `<ellipse class="k" cx="50" cy="90" rx="25" ry="6.5" fill="url(#g-krop-${navn})"/>`
-    + '<path d="M38 66 Q35 76 36 85" stroke="#fff" stroke-opacity=".5" stroke-width="3.2" fill="none" stroke-linecap="round"/>'
-    + '<path d="M34 75 Q50 80 66 75" stroke="var(--moerk)" stroke-width="3" fill="none" stroke-linecap="round"/>'
-    + '<rect x="46" y="74" width="8" height="7" rx="2" fill="#ffd23f" stroke="#a66b00" stroke-width="1.5"/>'
-    + '<circle class="k" cx="50" cy="45" r="19" fill="url(#g-hud)"/>'
-    + '<ellipse cx="37.5" cy="52" rx="4.2" ry="2.7" fill="#ff7aa2" opacity=".5"/><ellipse cx="62.5" cy="52" rx="4.2" ry="2.7" fill="#ff7aa2" opacity=".5"/>'
-    + `<g class="ojne" style="animation-delay:${blink}s"><ellipse cx="43" cy="46" rx="3.4" ry="4.5" fill="#2b2250"/><ellipse cx="57" cy="46" rx="3.4" ry="4.5" fill="#2b2250"/>`
-    + '<circle cx="44.3" cy="44.2" r="1.4" fill="#fff"/><circle cx="58.3" cy="44.2" r="1.4" fill="#fff"/></g>'
-    + '<path d="M45 54.5 Q50 59.5 55 54.5" stroke="#8a1c4a" stroke-width="2.4" fill="none" stroke-linecap="round"/>'
-    + HATTE[navn]
-    + `<g class="sverd"><rect x="${sx}" y="30" width="6" height="36" rx="2.5" fill="url(#g-staal)" stroke="#5d6b7e" stroke-width="1.5"/>`
-    + `<rect x="${sx - 6}" y="64" width="18" height="5" rx="2.5" fill="#ffd23f" stroke="#a66b00" stroke-width="1.5"/>`
-    + `<rect x="${sx + 1}" y="68" width="4" height="10" rx="2" fill="#7a4a1e"/></g>`
-    + '</svg>';
-}
 function lavBonde(farve) {
   const navn = farve === GUL ? 'gul' : 'lilla';
   const b = el('div', `bonde ${navn}-bonde`);
@@ -112,7 +83,13 @@ function lavBonde(farve) {
   const figur = el('div', 'figur');
   const aande = el('div', 'aande');
   aande.style.animationDelay = `${(-Math.random() * 1.7).toFixed(2)}s`;
-  aande.innerHTML = bondeSvg(navn);
+  const skabelon = /** @type {HTMLTemplateElement} */ (document.getElementById(`skabelon-${navn}`));
+  const svg = /** @type {SVGElement | undefined} */ (skabelon.content?.firstElementChild?.cloneNode(true));
+  if (svg) {
+    const ojne = /** @type {SVGElement | null} */ (svg.querySelector('.ojne'));
+    if (ojne) ojne.style.animationDelay = `${(-Math.random() * 4.6).toFixed(2)}s`;
+    aande.append(svg);
+  }
   figur.append(aande);
   b.append(skygge, figur);
   b.dele = { skygge, figur };

@@ -84,6 +84,7 @@ button[aria-pressed="false"] { opacity: .6; }
 .bonde .aande { position: absolute; inset: 0; transform-origin: 50% 94%; animation: aande 1.7s ease-in-out infinite alternate; }
 .bonde svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 1.5px 0 #00000026); }
 .bonde .k { stroke: var(--moerk); stroke-width: 2.6; stroke-linejoin: round; }
+.bonde .baelte { stroke: var(--moerk); }
 .bonde .ojne { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
 .bonde .sverd {
   opacity: 0; transform-box: fill-box; transform-origin: 50% 85%; transform: scale(.2) rotate(-40deg);
