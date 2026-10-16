@@ -340,7 +340,6 @@ async function animerTraek(traek, min) {
   const sy = (raekke(maalFelt) - raekke(traek.fra)) * 100;
   const t = (k) => `translate(${dx * k}%,${dy * k}%)`;
   const ts = (k) => `translate(${sx * k}%,${sy * k}%)`;
-  const p = pos(traek.til);
   a.style.zIndex = 20;
   for (const trin of kampTrin(traek)) {
     if (min !== omgang) return;

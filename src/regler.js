@@ -51,6 +51,7 @@ export function typerAf(spil) {
   return spil.typer ?? spil.braet.map((x) => (x ? 'B' : null));
 }
 
+/** @param {string[] | Set<string> | 'fuldt'} [valg] */
 export function nytSpil(valg = []) {
   const liste = valg === 'fuldt' ? VALGBARE : valg;
   if (!Array.isArray(liste) && !(liste instanceof Set)) throw new RangeError('Valget skal være en liste af brikker eller "fuldt"');
@@ -89,28 +90,21 @@ export function angrebet(braet, typer, felt, af) {
       if (braet[f] === af && typer[f] === 'B') return true;
     }
   }
-  for (const [liste, type] of [[SPRING, 'S'], [NABO, 'K']]) {
-    for (const [a, b] of liste) {
-      if (!paa(r + a, k + b)) continue;
-      const f = (r + a) * 8 + k + b;
-      if (braet[f] === af && typer[f] === type) return true;
+  const naer = (liste, type) => liste.some(([a, b]) => {
+    const f = (r + a) * 8 + k + b;
+    return paa(r + a, k + b) && braet[f] === af && typer[f] === type;
+  });
+  const straale = (liste, a1, a2) => liste.some(([a, b]) => {
+    let rr = r + a;
+    let kk = k + b;
+    while (paa(rr, kk)) {
+      const f = rr * 8 + kk;
+      if (braet[f] !== null) return braet[f] === af && (typer[f] === a1 || typer[f] === a2);
+      rr += a; kk += b;
     }
-  }
-  for (const [liste, a1, a2] of [[LIGE, 'T', 'D'], [SKRAA, 'L', 'D']]) {
-    for (const [a, b] of liste) {
-      let rr = r + a;
-      let kk = k + b;
-      while (paa(rr, kk)) {
-        const f = rr * 8 + kk;
-        if (braet[f] !== null) {
-          if (braet[f] === af && (typer[f] === a1 || typer[f] === a2)) return true;
-          break;
-        }
-        rr += a; kk += b;
-      }
-    }
-  }
-  return false;
+    return false;
+  });
+  return naer(SPRING, 'S') || naer(NABO, 'K') || straale(LIGE, 'T', 'D') || straale(SKRAA, 'L', 'D');
 }
 
 export function kongeFelt(braet, typer, farve) {
