@@ -28,6 +28,14 @@ h1 {
 #stjerner button.aktiv { filter: none; }
 #stjerner button:hover, #stjerner button:focus-visible { transform: scale(1.25); }
 #niveau-navn { display: block; font-weight: bold; color: var(--lilla-moerk); min-height: 1.4em; }
+.brikvalg { text-align: center; background: #fff8; border-radius: 20px; padding: 8px; margin-bottom: 10px; }
+.valgknapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.valgknapper button { padding: 6px 10px; min-height: 44px; font-size: .95rem; border-width: 2px; box-shadow: 0 3px 0 var(--lilla-moerk); }
+.valgknapper button[aria-pressed="true"] { background: var(--gul); border-color: var(--gul-moerk); box-shadow: 0 3px 0 var(--gul-moerk); }
+.valgknapper button[aria-pressed="false"] { opacity: 1; }
+.valgknapper button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.valgknapper .valg-hel { border-color: var(--lilla-moerk); }
+.valgtekst { margin: 6px 0 0; font-size: .95rem; min-height: 1.3em; }
 .raekke { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
 #status {
   flex: 1 1 200px; font-size: 1.3rem; font-weight: bold; padding: 8px 14px;
@@ -94,6 +102,21 @@ button[aria-pressed="false"] { opacity: .6; }
 .bonde.hugger .sverd { animation: hug .16s ease-in-out 4 alternate; }
 .gul-bonde { --farve: var(--gul); --moerk: #8a4b00; }
 .lilla-bonde { --farve: var(--lilla); --moerk: #3f1580; }
+.brik-T .figur, .brik-S .figur, .brik-L .figur { inset: -18% -6% 4%; }
+.brik-D .figur, .brik-K .figur { inset: -22% -8% 4%; }
+.brik-T .aande { animation-name: staa; animation-duration: 2.6s; }
+.brik-S .aande { animation: nik 2.4s ease-in-out infinite; }
+.brik-L .aande, .brik-D .aande { animation-name: vug; animation-duration: 2.2s; }
+.brik-K .aande { animation-duration: 2.4s; }
+.bonde .krone { transform-box: fill-box; transform-origin: 50% 100%; animation: glans 3.2s ease-in-out infinite; }
+.bonde.skak .figur { animation: ryster .35s ease-in-out infinite alternate; }
+.bonde.skak .skygge { background: radial-gradient(closest-side, #ff2e63cc, #ff2e6300); transform: scale(1.5); }
+.felt.skakfelt { box-shadow: inset 0 0 0 4px #ff2e63, inset 0 0 18px #ff2e6399; }
+@keyframes staa { to { transform: scale(1.01, .99); } }
+@keyframes nik { 0%, 70%, 100% { transform: none; } 80% { transform: rotate(-7deg) translateY(-3%); } 90% { transform: rotate(4deg); } }
+@keyframes vug { from { transform: rotate(-2deg); } to { transform: rotate(2deg) scale(1.01, .99); } }
+@keyframes glans { 0%, 85%, 100% { filter: none; } 92% { filter: brightness(1.35) drop-shadow(0 0 3px #fff6b0); } }
+@keyframes ryster { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
 .bonde.loeftet .figur { transform: translateY(-13%); }
 .bonde.loeftet .skygge { transform: scale(.72); opacity: .6; }
 .bonde.loeftet .aande { animation: svaev .55s ease-in-out infinite alternate; }
@@ -109,7 +132,8 @@ button[aria-pressed="false"] { opacity: .6; }
   position: absolute; font-size: clamp(1.4rem, 7vw, 2.6rem); font-weight: 900; color: #fff; z-index: 10;
   -webkit-text-stroke: 3px #ff2e63; paint-order: stroke fill; transform: translate(-50%, -50%);
 }
-.gnist, .stjerne, .konfetti, .stoev, .roeg, .glimt { position: absolute; pointer-events: none; z-index: 9; }
+.glimmer { font-size: clamp(.8rem, 3.4vw, 1.2rem); transform: translate(-50%, -50%); text-shadow: 0 0 6px #fff; }
+.gnist, .stjerne, .konfetti, .stoev, .roeg, .glimt, .glimmer { position: absolute; pointer-events: none; z-index: 9; }
 .stoev, .roeg { border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, #f3eadb); transform: translate(-50%, -50%); }
 .roeg { background: radial-gradient(circle at 40% 35%, #fff, #e6dcf5 70%, #cbbde6); }
 .glimt { width: 24%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(closest-side, #fff, #fff8 45%, #ffe06600); }
@@ -131,6 +155,6 @@ button[aria-pressed="false"] { opacity: .6; }
 .gul-tekst { background: var(--gul); padding: 0 6px; border-radius: 6px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .felt.maal::after, .felt.slagmaal::after, .felt.tip, .bonde.sejr .figur, .bonde .aande, .bonde .ojne, .bonde.hugger .sverd { animation: none; }
+  .felt.maal::after, .felt.slagmaal::after, .felt.tip, .bonde.sejr .figur, .bonde .aande, .bonde .ojne, .bonde.hugger .sverd, .bonde .krone, .bonde.skak .figur { animation: none; }
   #stjerner button { transition: none; }
 }

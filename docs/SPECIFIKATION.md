@@ -25,5 +25,23 @@ Animation: almindeligt træk = bonden hopper hen. Slag = KAMP: bønderne løber 
 - AK6 Kampplan: `kampTrin(traek)` giver for et slag rækkefølgen løb → slag → fald, for et almindeligt træk kun hop.
 - AK7 Site: `site/index.html` findes og indlæser `spil.js`; ingen eksterne adresser (alt lokalt).
 
+## Tilvalg af brikker og fuldt skak (bestilling 17. oktober 2026, Michael)
+Ønske: «efterhånden som barnet bliver bedre, kan man tilvælge nye brikker efter eget ønske; kun i begyndelsen af spillet; og en knap til fuldt spil. Udseende og animation skal matche og have egne animationer pr. brik.»
+
+**Låste valg (dirigentens):**
+- Før første træk vælges frit: tårne, heste, løbere, dronning, konge (knapper der kan slås til og fra), «Kun bønder» og «Fuldt skakspil». Hver valgt type stilles op for begge spillere på sin skakplads (tårne a/h, heste b/g, løbere c/f, dronning d, konge e). Valget huskes i browseren. Efter første træk er knapperne låst, til et nyt spil startes (også mens det første træk animeres).
+- **Uden konge** gælder bondeskakkets mål for alle brikker: en *bonde* på bagerste række vinder (ingen forvandling), alle modstanderens brikker slået vinder, spærret modstander vinder; 50 træk uden slag eller bondetræk = uafgjort. Ingen en passant og ingen rokade.
+- **Med konge** gælder de rigtige skakregler: man må ikke stå i skak efter sit træk, skakmat vinder, patt = uafgjort, rokade (hvis tårnene er med), en passant, forvandling (standard dronning; `udfoer(..., 'T'|'L'|'S')` kan vælge andet), 50-trækreglen og for lidt materiale (kun konger, eller konge + én hest/løber). Trefoldig gentagelse er ikke med (50-trækreglen sikrer, at et spil slutter).
+- Computeren: samme 10 niveauer; med brikker tænker den 0–6 lag (niveau 1–10), ser slag til ende fra niveau 4 og har et tidsloft på 1,5 s pr. træk.
+- Udseende: alle brikker tegnes i samme stil som bønderne (SVG-skabeloner i `site/index.html`, skrevet af `tools/tegn-brikker.py`): tårn med tinder og dør, hest med manke, løber med bispehue, dronning med juvelkrone, konge med kors og overskæg. Hver har sin egen bevægelse: bonde og konge hopper (kongen lavt og værdigt), tårnet glider tungt med rumlen og støv, løberen glider let med gnister, dronningen letter og flyver, hesten springer højt med galop. Kongen i skak ryster og får rødt felt. Rokade flytter tårnet samtidig. Forvandling sker med stjerner og klokker.
+
+**Acceptkriterier (tilføjet):**
+- AK8 Valg: rigtige pladser for hver kombination; ugyldigt valg → RangeError.
+- AK9 Skakregler: perft-tal stemmer med kendte facit for startstillingen (d1–4), «kiwipete» (d1–3), position 3 (d1–4), 4 og 5 (d1–3).
+- AK10 Slutninger med konger: skakmat (narremat), patt, for lidt materiale, 50-trækreglen, iSkak, forvandling.
+- AK11 Bondeskak med brikker: kun en bonde vinder ved at nå over; sidste brik slået vinder; ingen en passant uden konger.
+- AK12 Computeren med brikker: altid lovligt træk og under 2,5 s; niveau 7 slår 1 og niveau 10 slår 4 (mindst 4 af 6).
+- AK13 Bevægelser og tegninger: hver brik har sin stil; længere vej tager længere tid; tegning findes for alle 12 brikker.
+
 ## Ikke dækket (ærligt)
 Barnets oplevelse (balance, om sværhedsgraderne føles rigtige), lyd på rigtig enhed, ydeevne på gamle iPads.

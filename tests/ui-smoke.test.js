@@ -69,4 +69,19 @@ test('brugerfladen starter og et helt spil kan spilles uden fejl', async () => {
   ider.tip.click();
   ider.lyd.click();
   assert.equal(ider.lyd.attrs['aria-pressed'], 'false');
+
+  // Fuldt skakspil: valget lægger 32 brikker på brættet og låses efter første træk.
+  sp.saetValg(['T', 'S', 'L', 'D', 'K']);
+  assert.equal(ider.bonder.children.length, 32);
+  assert.equal(sp.spil.konger, true);
+  const { lovligeTraek } = await import('../src/regler.js');
+  for (let t = 0; t < 12 && !sp.spil.vinder; t += 1) {
+    const mine = lovligeTraek(sp.spil);
+    const valg = mine.find((m) => m.slag) ?? mine[t % mine.length];
+    sp.klikFelt(valg.fra);
+    sp.klikFelt(valg.til);
+    if (t === 0) { sp.saetValg([]); assert.equal(sp.spil.konger, true, 'valget skal være låst under spillet'); }
+    for (let i = 0; i < 400 && sp.optaget && !sp.spil.vinder; i += 1) await sov(5);
+  }
+  assert.ok(sp.spil.antalTraek >= 2);
 });
