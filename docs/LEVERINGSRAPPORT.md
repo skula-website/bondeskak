@@ -24,8 +24,16 @@
 - Brættet har dybde (rammegradient, felter med lys) og blødere markeringer. «Reducer bevægelse» slukker det hele.
 - Alle 12 porte bestået igen (`logs/porte/20261016-233033`). Set i browseren i mobilbredde med et slag; ingen konsolfejl.
 
+## Tilvalg af brikker og fuldt skak (17. oktober, nat, Michaels bestilling)
+- Over brættet: «Kun bønder», Tårne, Heste, Løbere, Dronning, Konge og «Fuldt skakspil». Kan kun ændres før første træk (låst også under første animation); huskes i browseren.
+- Uden konge: bondeskakkets mål for alle brikker. Med konge: rigtige skakregler (skakmat, patt, rokade, en passant, forvandling til dronning, 50-trækreglen, for lidt materiale). Se SPECIFIKATION.md.
+- Regler bevist med perft-tal for fem kendte stillinger (fx 197.281 stillinger efter 4 halvtræk fra start), som er standardfacit for skakprogrammer.
+- Computeren spiller alle kombinationer, slår lave niveauer 6/6 i fuldt skak og tænker under 0,2 s på niveau 10 fra start (tidsloft 1,5 s).
+- Nye tegninger i samme stil (tårn, hest, løber, dronning, konge) med egne bevægelser: hesten springer højt med galop, tårnet glider tungt med støv og rumlen, løberen glider med gnister, dronningen flyver med klokker, kongen går lavt og værdigt og ryster, når han står i skak. Rokade, en passant og forvandling er animeret.
+- Prøvet i browseren (mobilbredde) med fuldt skak: 30 træk med kampe for hest, bonde, dronning og løber, ingen konsolfejl, og hver brik på skærmen svarer til reglerne. Alle 12 porte og AK1–AK13 bestået (`logs/porte/20261017-000930`). En fejl fundet af testen og rettet: valget kunne ændres, mens første træk blev animeret.
+
 ## Ikke bevist
 - Kontrollant (lokal model) er ikke kørt. Børnetest og balance ud over selvspil er ikke målt.
 
 ## Næste skridt
-Din prøve. Er du tilfreds, så tryk «Godkend – færdig» på kortet i Overblik; så flyttes Bondeskak til Lenovo-disken, når iMac'en er tændt.
+Din prøve af brikvalget. Er du tilfreds, så tryk «Godkend – færdig» på kortet i Overblik; så flyttes Bondeskak til Lenovo-disken, når iMac'en er tændt.
