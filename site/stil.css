@@ -77,13 +77,13 @@ button[aria-pressed="false"] { opacity: .6; }
 /* ---------- bønderne (SVG) ---------- */
 .bonde { position: absolute; width: 12.5%; height: 12.5%; will-change: transform; }
 .bonde .skygge {
-  position: absolute; left: 20%; right: 20%; bottom: 4%; height: 13%; border-radius: 50%;
+  position: absolute; left: 16%; right: 16%; bottom: 3%; height: 15%; border-radius: 50%;
   background: radial-gradient(closest-side, #1a0f3a66, #1a0f3a00); transition: transform .25s, opacity .25s;
 }
-.bonde .figur { position: absolute; inset: 1% 3% 5%; transform-origin: 50% 94%; transition: transform .28s cubic-bezier(.3, 1.6, .5, 1); }
+.bonde .figur { position: absolute; inset: -12% -4% 4%; transform-origin: 50% 94%; transition: transform .28s cubic-bezier(.3, 1.6, .5, 1); }
 .bonde .aande { position: absolute; inset: 0; transform-origin: 50% 94%; animation: aande 1.7s ease-in-out infinite alternate; }
-.bonde svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 1.5px 0 #00000026); }
-.bonde .k { stroke: var(--moerk); stroke-width: 2.6; stroke-linejoin: round; }
+.bonde svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 2px 1px #2b225040); }
+.bonde .k { stroke: var(--moerk); stroke-width: 3.2; stroke-linejoin: round; }
 .bonde .baelte { stroke: var(--moerk); }
 .bonde .ojne { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
 .bonde .sverd {
@@ -92,7 +92,7 @@ button[aria-pressed="false"] { opacity: .6; }
 }
 .bonde.kaemper .sverd { opacity: 1; transform: none; }
 .bonde.hugger .sverd { animation: hug .16s ease-in-out 4 alternate; }
-.gul-bonde { --farve: var(--gul); --moerk: #b86f00; }
+.gul-bonde { --farve: var(--gul); --moerk: #8a4b00; }
 .lilla-bonde { --farve: var(--lilla); --moerk: #3f1580; }
 .bonde.loeftet .figur { transform: translateY(-13%); }
 .bonde.loeftet .skygge { transform: scale(.72); opacity: .6; }
