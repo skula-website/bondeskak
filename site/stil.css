@@ -45,58 +45,73 @@ button:focus-visible { outline: 4px solid #ff5d8f; outline-offset: 2px; }
 button[aria-pressed="false"] { opacity: .6; }
 
 #braet-ramme {
-  position: relative; width: 100%; aspect-ratio: 1; border: 8px solid var(--lilla-moerk);
-  border-radius: 20px; overflow: hidden; background: var(--felt-lys); box-shadow: 0 8px 0 #0002;
+  position: relative; width: 100%; aspect-ratio: 1; border: 10px solid transparent; border-radius: 22px; overflow: hidden;
+  background: linear-gradient(var(--felt-lys), var(--felt-lys)) padding-box, linear-gradient(150deg, #b98aff, #7a3fd0 45%, #4a1a8c) border-box;
+  box-shadow: 0 8px 0 #3a1673, 0 18px 30px #2b225040, inset 0 0 0 2px #ffffff55;
 }
 #braet, #bonder, #effekter { position: absolute; inset: 0; }
 #braet { display: grid; grid-template: repeat(8, 1fr) / repeat(8, 1fr); }
 #bonder, #effekter { pointer-events: none; }
-.felt { border: 0; border-radius: 0; box-shadow: none; padding: 0; min-height: 0; position: relative; background: var(--felt-lys); }
-.felt.moerk { background: var(--felt-moerk); }
-.felt:active { transform: none; box-shadow: none; }
-.felt.valgt { background: #ffe066; outline: 4px solid #ff9f1c; outline-offset: -4px; }
-.felt.maal::after, .felt.slagmaal::after {
-  content: ""; position: absolute; inset: 30%; border-radius: 50%; background: #ff5d8f99;
-  animation: puls 0.9s ease-in-out infinite;
+.felt {
+  border: 0; border-radius: 0; padding: 0; min-height: 0; position: relative;
+  background: linear-gradient(150deg, #fffaf0, var(--felt-lys) 60%, #ffe7ad);
+  box-shadow: inset 0 1px 0 #ffffffaa, inset 0 -2px 0 #00000008; transition: background-color .2s, filter .2s;
 }
-.felt.slagmaal::after { inset: 8%; background: none; border: 5px dashed #ff2e63; animation: spin 3s linear infinite; }
-.felt.tip { box-shadow: inset 0 0 0 5px #00c2a8; animation: puls 0.6s ease-in-out infinite; }
+.felt.moerk { background: linear-gradient(150deg, #a6e8cb, var(--felt-moerk) 60%, #5fb995); box-shadow: inset 0 1px 0 #ffffff55, inset 0 -2px 0 #00000012; }
+.felt:active { transform: none; }
+.felt:hover { filter: brightness(1.05); }
+.felt.valgt { background: radial-gradient(circle at 50% 60%, #fffbd6 0, #ffe066 55%, #ffc928 100%); box-shadow: inset 0 0 0 3px #ff9f1c, inset 0 0 14px #ff9f1c88; }
+.felt.maal::after {
+  content: ""; position: absolute; inset: 34%; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fff, #ff8fb1 55%, #ff5d8f); box-shadow: 0 0 10px #ff5d8faa;
+  animation: puls 1.1s ease-in-out infinite;
+}
+.felt.slagmaal::after {
+  content: ""; position: absolute; inset: 7%; border-radius: 50%; border: 4px dashed #ff2e63;
+  box-shadow: 0 0 12px #ff2e6388, inset 0 0 12px #ff2e6355; animation: spin 4s linear infinite;
+}
+.felt.tip { box-shadow: inset 0 0 0 5px #00c2a8, inset 0 0 16px #00c2a888; animation: puls 0.7s ease-in-out infinite; }
 @keyframes puls { 50% { transform: scale(1.18); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ---------- bønderne (SVG) ---------- */
 .bonde { position: absolute; width: 12.5%; height: 12.5%; will-change: transform; }
-.bonde .krop {
-  position: absolute; left: 24%; right: 24%; bottom: 8%; height: 34%; border-radius: 40% 40% 18% 18%;
-  background: var(--farve); border: 3px solid var(--moerk);
+.bonde .skygge {
+  position: absolute; left: 20%; right: 20%; bottom: 4%; height: 13%; border-radius: 50%;
+  background: radial-gradient(closest-side, #1a0f3a66, #1a0f3a00); transition: transform .25s, opacity .25s;
 }
-.bonde .hoved {
-  position: absolute; left: 22%; right: 22%; top: 16%; height: 46%; border-radius: 50%;
-  background: #ffe0c2; border: 3px solid var(--moerk); z-index: 2;
-}
-.bonde .hat {
-  position: absolute; left: 14%; right: 14%; top: 12%; height: 22%; border-radius: 50% 50% 8% 8%;
-  background: var(--farve); border: 3px solid var(--moerk); z-index: 3;
-}
-.bonde .oje { position: absolute; top: 46%; width: 14%; height: 20%; border-radius: 50%; background: #2b2250; }
-.bonde .oje:nth-of-type(1) { left: 24%; } .bonde .oje:nth-of-type(2) { right: 24%; }
-.bonde .mund { position: absolute; left: 34%; right: 34%; bottom: 14%; height: 14%; border-bottom: 3px solid #c2185b; border-radius: 0 0 50% 50%; }
+.bonde .figur { position: absolute; inset: 1% 3% 5%; transform-origin: 50% 94%; transition: transform .28s cubic-bezier(.3, 1.6, .5, 1); }
+.bonde .aande { position: absolute; inset: 0; transform-origin: 50% 94%; animation: aande 1.7s ease-in-out infinite alternate; }
+.bonde svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 1.5px 0 #00000026); }
+.bonde .k { stroke: var(--moerk); stroke-width: 2.6; stroke-linejoin: round; }
+.bonde .ojne { transform-box: fill-box; transform-origin: center; animation: blink 4.6s infinite; }
 .bonde .sverd {
-  position: absolute; right: -2%; top: 34%; width: 10%; height: 46%; background: #e9eef5; border: 2px solid #6c7a89;
-  border-radius: 3px 3px 0 0; transform-origin: 50% 100%; transform: rotate(20deg); z-index: 4; opacity: 0; transition: opacity .15s;
+  opacity: 0; transform-box: fill-box; transform-origin: 50% 85%; transform: scale(.2) rotate(-40deg);
+  transition: opacity .15s, transform .25s cubic-bezier(.3, 1.6, .5, 1);
 }
-.bonde .sverd::after { content: ""; position: absolute; left: -90%; right: -90%; bottom: -8%; height: 12%; background: #d4a017; border-radius: 3px; }
-.bonde.kaemper .sverd { opacity: 1; }
-.gul-bonde { --farve: var(--gul); --moerk: var(--gul-moerk); }
-.lilla-bonde { --farve: var(--lilla); --moerk: var(--lilla-moerk); }
-.bonde.lilla-bonde .sverd { right: auto; left: -2%; transform: rotate(-20deg); }
-.bonde.sejr { animation: dans 0.5s ease-in-out infinite alternate; }
-@keyframes dans { from { transform: rotate(-12deg); } to { transform: translateY(-14%) rotate(12deg); } }
+.bonde.kaemper .sverd { opacity: 1; transform: none; }
+.bonde.hugger .sverd { animation: hug .16s ease-in-out 4 alternate; }
+.gul-bonde { --farve: var(--gul); --moerk: #b86f00; }
+.lilla-bonde { --farve: var(--lilla); --moerk: #3f1580; }
+.bonde.loeftet .figur { transform: translateY(-13%); }
+.bonde.loeftet .skygge { transform: scale(.72); opacity: .6; }
+.bonde.loeftet .aande { animation: svaev .55s ease-in-out infinite alternate; }
+.lilla-bonde.taenker .aande { animation-duration: .45s; }
+.bonde.sejr .figur { animation: dans .45s ease-in-out infinite alternate; }
+@keyframes aande { to { transform: scale(1.03, .97); } }
+@keyframes svaev { from { transform: translateY(0); } to { transform: translateY(-5%) rotate(2deg); } }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+@keyframes hug { from { transform: rotate(-35deg); } to { transform: rotate(30deg); } }
+@keyframes dans { from { transform: rotate(-10deg) scale(1.02, .98); } to { transform: translateY(-16%) rotate(10deg) scale(.98, 1.04); } }
 
 .pow {
   position: absolute; font-size: clamp(1.4rem, 7vw, 2.6rem); font-weight: 900; color: #fff; z-index: 10;
   -webkit-text-stroke: 3px #ff2e63; paint-order: stroke fill; transform: translate(-50%, -50%);
 }
-.gnist, .stjerne, .konfetti { position: absolute; pointer-events: none; z-index: 9; }
+.gnist, .stjerne, .konfetti, .stoev, .roeg, .glimt { position: absolute; pointer-events: none; z-index: 9; }
+.stoev, .roeg { border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, #f3eadb); transform: translate(-50%, -50%); }
+.roeg { background: radial-gradient(circle at 40% 35%, #fff, #e6dcf5 70%, #cbbde6); }
+.glimt { width: 24%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(closest-side, #fff, #fff8 45%, #ffe06600); }
 .stjerne { font-size: 1.6rem; transform: translate(-50%, -50%); }
 .konfetti { width: 10px; height: 16px; top: -20px; z-index: 30; }
 
@@ -115,6 +130,6 @@ button[aria-pressed="false"] { opacity: .6; }
 .gul-tekst { background: var(--gul); padding: 0 6px; border-radius: 6px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .felt.maal::after, .felt.slagmaal::after, .felt.tip, .bonde.sejr { animation: none; }
+  .felt.maal::after, .felt.slagmaal::after, .felt.tip, .bonde.sejr .figur, .bonde .aande, .bonde .ojne, .bonde.hugger .sverd { animation: none; }
   #stjerner button { transition: none; }
 }

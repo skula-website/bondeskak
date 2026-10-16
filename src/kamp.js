@@ -2,7 +2,7 @@
 // Et almindeligt træk er ét hop. Et slag er en kamp i tre akter:
 // bønderne løber mod hinanden, slår med sværd, og den tabende falder.
 
-export const TRIN_VARIGHED = { hop: 380, loeb: 420, slag: 560, fald: 650 };
+export const TRIN_VARIGHED = { hop: 520, loeb: 480, slag: 640, fald: 760 };
 
 export function kampTrin(traek) {
   if (!traek || typeof traek !== 'object') throw new TypeError('Mangler træk');
