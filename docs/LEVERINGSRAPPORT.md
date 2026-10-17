@@ -1,8 +1,8 @@
 # Leveringsrapport: Bondeskak for børn (bestilling #20, 16. oktober 2026)
 
 ## Sådan ser du resultatet
-Genoptaget 17. oktober for et kompakt indstillingspanel. Mens det ligger på minen: **http://100.122.133.31:8088/vis/bondeskak/** (hjemme også http://mini.local:8088/vis/bondeskak/) eller «Åbn resultatet» på kortet i Overblik.
-Når det er godkendt igen, flyttes det til `/Volumes/Lenovo PS8/ps8/bondeskak` og åbnes med ikonet **«Åbn Bondeskak»** i mappen (http://127.0.0.1:8835/site/).
+**På mobilen (også offline): https://skula-website.github.io/bondeskak/** – åbn linket én gang og tryk «Føj til hjemmeskærm» (iPhone: Del-knappen i Safari; Android: menuen ⋮ i Chrome → «Installer app»/«Føj til startskærm»). Derefter ligger Bondeskak som app med den gule bonde og virker uden internet.
+Under udvikling på minen: http://100.122.133.31:8088/vis/bondeskak/ (eller «Åbn resultatet» i Overblik). Efter flytning til Lenovo: ikonet «Åbn Bondeskak» i projektmappen.
 
 ## Leveret
 - `src/regler.js` (regler, uforanderlig), `src/ai.js` (10 niveauer), `src/kamp.js` (kampplan, tekster), `site/` (index.html, stil.css, spil.js).
@@ -38,6 +38,13 @@ Når det er godkendt igen, flyttes det til `/Volumes/Lenovo PS8/ps8/bondeskak` o
 - Under spillet er panelet skjult og afløst af én linje (fx «Niveau 3: Glad kanin · Fuldt skak»); det kommer tilbage ved «Nyt spil» eller når spillet slutter. Undertitlen følger spilformen.
 - Set i mobil- og desktopbredde; alle 12 porte bestået (`logs/porte/20261017-112757`).
 - Oprydning: genoptagelsen tog Finders `.DS_Store` med i git; den er fjernet, og flytningen tager hverken den eller ikon-appen med fremover.
+
+## Hjemmeskærms-app og offline (17. oktober, Michaels ønske: datterens egen mobil)
+- Udgivet på GitHub Pages (Michaels ja; ikke-kommercielt): repo `skula-website/bondeskak` (kildekoden på `main`, udgivelsen på `gh-pages`).
+- App-manifest, app-ikoner (den gule bonde, også «maskable» til Android), fuld skærm uden browserlinjer, sikre kanter på telefoner med hak.
+- Offline: sw.js gemmer alle 12 filer første gang og svarer derfra bagefter; ny udgave hentes af sig selv, når telefonen er online (versionen er en kontrolsum af filerne). Kun aktiv på https, så udvikling på minen og ikon-serveren ikke påvirkes.
+- Udgiv en ny version: `python3 tools/udgiv.py` på iMac'en (kræver gh-login som skula-website). Ikonerne tegnes med `python3 tools/lav-app-ikoner.py`.
+- Afprøvet: siden svarer 200, offline-delen styrer siden, og alle 12 filer leveres fra telefonens lager. Ikke afprøvet: en rigtig telefon i flytilstand og selve «Føj til hjemmeskærm» på iPhone/Android.
 
 ## Ikke bevist
 - Kontrollant (lokal model) er ikke kørt. Børnetest og balance ud over selvspil er ikke målt.
