@@ -44,7 +44,7 @@ h1 {
 .valgknapper .valg-hel { border-color: var(--lilla-moerk); }
 .resume {
   margin: 0 0 8px; padding: 6px 12px; border-radius: 12px; background: #fff8; font-size: .9rem; text-align: center;
-  color: var(--lilla-moerk); font-weight: bold;
+  color: var(--lilla-moerk); font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .resume[hidden] { display: none; }
 .raekke { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }

@@ -504,7 +504,8 @@ function nytSpilStart() {
   slutEl.hidden = true;
   effekterEl.replaceChildren();
   byggBonder(); opdaterFelter(); visValg();
-  sigStatus(spil.konger ? `Din tur! Sæt den lilla konge skakmat. Niveau ${niveau}` : `Din tur! Niveau ${niveau}: ${NIVEAUNAVN[niveau - 1]}`);
+  $('undertitel').textContent = spil.konger ? 'Sæt den lilla konge skakmat!' : 'Kom først over på den anden side – eller slå alle de lilla brikker!';
+  sigStatus('Din tur!');
 }
 
 // ---------- valg af brikker (kun før første træk) ----------
@@ -513,7 +514,7 @@ const valgKnapper = new Map();
 function byggValg() {
   const g = $('valgknapper');
   g.replaceChildren();
-  const kun = el('button', 'valg-hel', '♟ Kun bønder');
+  const kun = el('button', 'valg-hel', '♟ Bønder');
   kun.type = 'button';
   kun.addEventListener('click', () => saetValg([]));
   valgKnapper.set('kun', kun);
@@ -542,7 +543,8 @@ function visValg() {
   // Under spillet er der intet at vælge: panelet skjules og afløses af én linje.
   $('indstillinger').hidden = laast;
   $('resume').hidden = !laast;
-  $('resume').textContent = `Niveau ${niveau}: ${NIVEAUNAVN[niveau - 1]} · ${brikTekst()} · «Nyt spil» for at ændre`;
+  $('resume').textContent = `Niveau ${niveau}: ${NIVEAUNAVN[niveau - 1]} · ${brikTekst()}`;
+  $('resume').title = 'Tryk «Nyt spil» for at ændre';
   for (const [n, k] of valgKnapper) {
     const til = n === 'kun' ? valg.length === 0 : n === 'fuldt' ? valg.length === VALGBARE.length : valg.includes(n);
     k.setAttribute('aria-pressed', String(til));
