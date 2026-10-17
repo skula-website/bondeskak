@@ -21,17 +21,13 @@
     <h1>Bondeskak</h1>
     <p class="undertitel">Kom først over på den anden side – eller slå alle de lilla bønder!</p>
 
-    <section aria-label="Vælg sværhedsgrad" class="niveau">
-      <span class="niveau-tekst">Hvor stærk skal computeren være?</span>
+    <section id="indstillinger" class="indstillinger" aria-label="Indstillinger før spillet">
+      <div class="linje"><b>Computer</b><output id="niveau-navn" aria-live="polite"></output></div>
       <div id="stjerner" role="radiogroup" aria-label="Sværhedsgrad 1 til 10"></div>
-      <output id="niveau-navn" aria-live="polite"></output>
-    </section>
-
-    <section aria-label="Vælg brikker" class="brikvalg">
-      <span class="niveau-tekst">Hvilke brikker skal med?</span>
+      <div class="linje"><b>Brikker</b><span id="valgtekst" aria-live="polite"></span></div>
       <div id="valgknapper" class="valgknapper"></div>
-      <p id="valgtekst" class="valgtekst" aria-live="polite"></p>
     </section>
+    <p id="resume" class="resume" hidden></p>
 
     <div class="raekke">
       <div id="status" role="status" aria-live="polite">Din tur!</div>

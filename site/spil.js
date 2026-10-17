@@ -532,16 +532,23 @@ function byggValg() {
   g.append(fuldt);
   visValg();
 }
+function brikTekst() {
+  if (valg.length === 0) return 'Kun bønder';
+  if (valg.length === VALGBARE.length) return 'Fuldt skak';
+  return `Bønder + ${valg.map((b) => VALGNAVN[b].split(' ')[1].toLowerCase()).join(', ')}`;
+}
 function visValg() {
   const laast = (spil.antalTraek > 0 || optaget) && !spil.vinder;
+  // Under spillet er der intet at vælge: panelet skjules og afløses af én linje.
+  $('indstillinger').hidden = laast;
+  $('resume').hidden = !laast;
+  $('resume').textContent = `Niveau ${niveau}: ${NIVEAUNAVN[niveau - 1]} · ${brikTekst()} · «Nyt spil» for at ændre`;
   for (const [n, k] of valgKnapper) {
     const til = n === 'kun' ? valg.length === 0 : n === 'fuldt' ? valg.length === VALGBARE.length : valg.includes(n);
     k.setAttribute('aria-pressed', String(til));
     k.disabled = laast;
   }
-  $('valgtekst').textContent = laast
-    ? 'Brikkerne kan vælges igen, når du starter et nyt spil.'
-    : valg.includes('K') ? 'Med konge gælder de rigtige skakregler: sæt kongen skakmat.' : 'Uden konge: få en bonde over, eller slå alle brikkerne.';
+  $('valgtekst').textContent = valg.includes('K') ? 'Med konge: sæt kongen skakmat' : 'Få en bonde over, eller slå alt';
 }
 function saetValg(nyt) {
   if ((spil.antalTraek > 0 || optaget) && !spil.vinder) return;
