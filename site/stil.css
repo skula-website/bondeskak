@@ -11,7 +11,7 @@ body {
   font-family: "Trebuchet MS", "Comic Sans MS", system-ui, sans-serif;
   background: linear-gradient(160deg, var(--bg1), var(--bg2));
 }
-main { max-width: 680px; margin: 0 auto; padding: 12px 12px 40px; }
+main { max-width: 680px; margin: 0 auto; padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
 h1 {
   margin: 4px 0 0; text-align: center; font-size: clamp(2rem, 8vw, 3.2rem);
   color: var(--lilla-moerk); text-shadow: 3px 3px 0 var(--gul);

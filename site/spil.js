@@ -601,4 +601,8 @@ byggBraet();
 byggStjerner();
 byggValg();
 nytSpilStart();
+// Offline: den udgivne udgave (https) gemmer hele spillet på telefonen (sw.js laves af tools/udgiv.py).
+if (globalThis.location?.protocol === 'https:' && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => { /* uden offline virker spillet stadig online */ });
+}
 globalThis.__bondeskak = { get spil() { return spil; }, get optaget() { return optaget; }, klikFelt, saetValg };
