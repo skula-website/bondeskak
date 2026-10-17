@@ -1,9 +1,8 @@
 # Leveringsrapport: Bondeskak for børn (bestilling #20, 16. oktober 2026)
 
 ## Sådan ser du resultatet
-Bondeskak er færdigt (godkendt af Michael 17. oktober) og flyttet til Lenovo-disken: `/Volumes/Lenovo PS8/ps8/bondeskak`.
-Dobbeltklik på ikonet **«Åbn Bondeskak»** i den mappe (den gule bonde). Det starter en lille server på iMac'en og åbner spillet på **http://127.0.0.1:8835/site/**. Kører serveren allerede, åbnes siden bare. Afprøvet 17. oktober: fra stoppet server til spillet vist på få sekunder, ingen konsolfejl.
-Skal der arbejdes videre, så tryk «Genoptag» på kortet i Overblik; så hentes projektet tilbage til minen (kræver, at iMac'en er tændt).
+Genoptaget 17. oktober for et kompakt indstillingspanel. Mens det ligger på minen: **http://100.122.133.31:8088/vis/bondeskak/** (hjemme også http://mini.local:8088/vis/bondeskak/) eller «Åbn resultatet» på kortet i Overblik.
+Når det er godkendt igen, flyttes det til `/Volumes/Lenovo PS8/ps8/bondeskak` og åbnes med ikonet **«Åbn Bondeskak»** i mappen (http://127.0.0.1:8835/site/).
 
 ## Leveret
 - `src/regler.js` (regler, uforanderlig), `src/ai.js` (10 niveauer), `src/kamp.js` (kampplan, tekster), `site/` (index.html, stil.css, spil.js).
@@ -33,6 +32,12 @@ Skal der arbejdes videre, så tryk «Genoptag» på kortet i Overblik; så hente
 - Computeren spiller alle kombinationer, slår lave niveauer 6/6 i fuldt skak og tænker under 0,2 s på niveau 10 fra start (tidsloft 1,5 s).
 - Nye tegninger i samme stil (tårn, hest, løber, dronning, konge) med egne bevægelser: hesten springer højt med galop, tårnet glider tungt med støv og rumlen, løberen glider med gnister, dronningen flyver med klokker, kongen går lavt og værdigt og ryster, når han står i skak. Rokade, en passant og forvandling er animeret.
 - Prøvet i browseren (mobilbredde) med fuldt skak: 30 træk med kampe for hest, bonde, dronning og løber, ingen konsolfejl, og hver brik på skærmen svarer til reglerne. Alle 12 porte og AK1–AK13 bestået (`logs/porte/20261017-000930`). En fejl fundet af testen og rettet: valget kunne ændres, mens første træk blev animeret.
+
+## Kompakt indstillingspanel (17. oktober, Michaels ønske)
+- Før spillet: ét panel med samme opbygning på alle skærme: «Computer» med 10 stjerner på én række og niveaunavnet, «Brikker» med knapperne i et fast gitter (4 + 3) og en kort regeltekst.
+- Under spillet er panelet skjult og afløst af én linje (fx «Niveau 3: Glad kanin · Fuldt skak»); det kommer tilbage ved «Nyt spil» eller når spillet slutter. Undertitlen følger spilformen.
+- Set i mobil- og desktopbredde; alle 12 porte bestået (`logs/porte/20261017-112757`).
+- Oprydning: genoptagelsen tog Finders `.DS_Store` med i git; den er fjernet, og flytningen tager hverken den eller ikon-appen med fremover.
 
 ## Ikke bevist
 - Kontrollant (lokal model) er ikke kørt. Børnetest og balance ud over selvspil er ikke målt.
